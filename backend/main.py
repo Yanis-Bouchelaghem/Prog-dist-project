@@ -1,9 +1,20 @@
 from fastapi import FastAPI
 import uvicorn
 import os
+from contextlib import asynccontextmanager
+
+from database.dependencies import create_db_and_tables
+from database.transactions.router import router as transactions_router
+#Things to do before and after the app runs.
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables()
+    yield #What comes above this yield will execute before the app starts. What comes under will execute after the app stops.
+
+app = FastAPI(lifespan=lifespan)
+app.include_router(transactions_router)
 
 
-app = FastAPI()
 
 @app.get("/")
 def hello():

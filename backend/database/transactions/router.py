@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from .models import TransactionDB, TransactionIn, TransactionOut
 
@@ -13,5 +13,6 @@ router = APIRouter(
 
 @router.get("/")
 async def get_all_transactions(db_session: Session = Depends(get_db_session)) -> list[TransactionOut]:
+    select_transaction_query = select(TransactionDB)
     
 
