@@ -13,6 +13,12 @@ class TransactionOut(TransactionBase):
     id: int
     timestamp: datetime = Field(default_factory=datetime.now)
 
+class TransactionUpdate(SQLModel):
+    amount: float | None = None
+    category: str | None = None
+    description: str | None = None
+
+
 class TransactionDB(TransactionBase, table=True):
     __tablename__: str = "transactions"
     id: int | None = Field(primary_key=True, default=None)
