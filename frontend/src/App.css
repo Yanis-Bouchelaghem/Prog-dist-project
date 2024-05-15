@@ -43,7 +43,7 @@ h1 {
 }
 
 .edit-button{
-  background-color: #4CAF50;
+  background-color: #4f4caf;
 }
 
 .delete-button {
@@ -104,4 +104,20 @@ h1 {
 .modal-content button:last-child {
   background-color: #f44336;
   color: white;
+}
+
+.add-transaction-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.add-transaction-button button {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
