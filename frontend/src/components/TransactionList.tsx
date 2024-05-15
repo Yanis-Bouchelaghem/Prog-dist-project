@@ -1,10 +1,10 @@
 import React from 'react';
 import TransactionItem from './TransactionItem';
 import {useQuery} from '@tanstack/react-query'
-
+import TransactionItemProps from '../interfaces/TransactionItemProps';
 
 const TransactionList: React.FC = () => {
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data } = useQuery<TransactionItemProps[]>({
     queryKey: ['repoData'],
     queryFn: () =>
       fetch('http://127.0.0.1:8000/transaction/').then((res) =>

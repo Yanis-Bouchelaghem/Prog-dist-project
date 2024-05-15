@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface TransactionItemProps {
-  amount: number;
-  category: string;
-  description: string;
-  timestamp: string;
-}
+import TransactionItemProps from '../interfaces/TransactionItemProps';
 
 const TransactionItem: React.FC<TransactionItemProps> = ({ amount, category, description, timestamp }) => {
   return (
