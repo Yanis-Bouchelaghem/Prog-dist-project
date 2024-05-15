@@ -1,5 +1,5 @@
 import React from 'react';
-import TransactionList from './components/TransactionList';
+import TransactionList from './components/TransactionList.tsx';
 import './App.css';
 
 const App: React.FC = () => {

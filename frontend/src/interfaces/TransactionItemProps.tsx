@@ -5,4 +5,5 @@ export default interface TransactionItemProps {
   description: string;
   timestamp: string;
   onDelete: (id: number) => void;
+  onEdit: (transaction: any) => void;
   }
