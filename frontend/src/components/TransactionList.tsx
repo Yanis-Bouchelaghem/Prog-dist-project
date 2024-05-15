@@ -1,28 +1,42 @@
 import React from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TransactionItem from './TransactionItem';
-import {useQuery} from '@tanstack/react-query'
-import TransactionItemProps from '../interfaces/TransactionItemProps';
+import axios from 'axios';
+
+// Fetch transactions
+const fetchTransactions = async () => {
+  const response = await axios.get('http://127.0.0.1:8000/transaction/');
+  return response.data;
+};
+
+// Delete transaction
+const deleteTransaction = async (id: number) => {
+  await axios.delete(`http://127.0.0.1:8000/transaction/${id}`);
+};
 
 const TransactionList: React.FC = () => {
-  const { isPending, error, data } = useQuery<TransactionItemProps[]>({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('http://127.0.0.1:8000/transaction/').then((res) =>
-        res.json(),
-      ),
-  })
+  const queryClient = useQueryClient();
 
-  
-  if (isPending) return 'Loading...'
+  const { data, error, isLoading } = useQuery({queryKey: ['transactions'], queryFn: fetchTransactions});
 
-  if (error) return 'An error has occurred: ' + error.message
+  const mutation = useMutation({mutationFn: deleteTransaction,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['transactions']);
+    },
+  });
 
+  const handleDelete = (id: number) => {
+    mutation.mutate(id);
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading transactions</div>;
 
   return (
     <div className="transaction-list">
-      <h2>Transactions</h2>
-      {data.map((transaction) => (
-        <TransactionItem key={transaction.id} {...transaction} />
+      <h1>Transactions</h1>
+      {data.map((transaction: any) => (
+        <TransactionItem key={transaction.id} {...transaction} onDelete={handleDelete} />
       ))}
     </div>
   );
