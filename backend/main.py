@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import uvicorn
 import os
 from contextlib import asynccontextmanager
+from fastapi.middleware.cors import CORSMiddleware
 
 from database.dependencies import create_db_and_tables
 from database.transactions.router import router as transactions_router
@@ -15,6 +16,17 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(transactions_router)
 
 
+origins = [
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def hello():
