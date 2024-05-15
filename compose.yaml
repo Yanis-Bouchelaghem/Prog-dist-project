@@ -1,6 +1,24 @@
 version: '3'
 name: money-manager
 services:
+
+  react:
+    build: frontend/
+    ports:
+      - "5173:5173"
+    depends_on:
+      - fastapi
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+          ignore:
+            - node_modules/
+    command: ["npm", "run", "dev"]
+    networks:
+      - default-network
+
   fastapi:
     build: backend/
     ports:
