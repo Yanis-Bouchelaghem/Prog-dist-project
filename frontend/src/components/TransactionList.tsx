@@ -7,23 +7,23 @@ import AddTransactionModal from './AddTransactionModal';
 
 // Fetch transactions
 const fetchTransactions = async () => {
-  const response = await axios.get('http://127.0.0.1:8000/transaction/');
+  const response = await axios.get('http://192.168.49.2:30236/transaction/');
   return response.data;
 };
 
 // Delete transaction
 const deleteTransaction = async (id: number) => {
-  await axios.delete(`http://127.0.0.1:8000/transaction/${id}`);
+  await axios.delete(`http://192.168.49.2:30236/transaction/${id}`);
 };
 
 // Update transaction
 const updateTransaction = async (transaction: any) => {
-  await axios.put(`http://127.0.0.1:8000/transaction/${transaction.id}`, transaction);
+  await axios.put(`http://192.168.49.2:30236/transaction/${transaction.id}`, transaction);
 };
 
 // Add transaction
 const addTransaction = async (transaction: any) => {
-  await axios.post('http://127.0.0.1:8000/transaction/', transaction);
+  await axios.post('http://192.168.49.2:30236/transaction/', transaction);
 };
 
 const TransactionList: React.FC = () => {
