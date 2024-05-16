@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: money-manager-config
+  namespace: money-manager
+data:
+  POSTGRES_USER: "your_postgres_user"
+  POSTGRES_PASSWORD: "your_postgres_password"
+  POSTGRES_DB: "your_postgres_db"
+  ENGINE_ECHO: "true"
+  PGADMIN_DEFAULT_EMAIL: "your_pgadmin_email"
+  PGADMIN_DEFAULT_PASSWORD: "your_pgadmin_password"

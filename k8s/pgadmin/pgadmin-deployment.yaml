@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+  namespace: money-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+        - name: pgadmin
+          image: dpage/pgadmin4:8.3
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: money-manager-config
+          volumeMounts:
+            - name: pgadmin-config
+              mountPath: /pgadmin4/servers.json
+              subPath: servers.json
+      volumes:
+        - name: pgadmin-config
+          configMap:
+            name: money-manager-config

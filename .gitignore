@@ -14,3 +14,7 @@ venv/
 
 #env file
 .env
+
+#configmap
+
+configmap.yaml

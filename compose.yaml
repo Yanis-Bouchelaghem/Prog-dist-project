@@ -4,6 +4,7 @@ services:
 
   react:
     build: frontend/
+    image: alphashow/money-manager-react:latest
     ports:
       - "5173:5173"
     depends_on:
@@ -21,6 +22,7 @@ services:
 
   fastapi:
     build: backend/
+    image: alphashow/money-manager-fastapi:latest
     ports:
       - "8000:8000"
     depends_on:
